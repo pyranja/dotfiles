@@ -1,0 +1,13 @@
+#!/bin/bash
+set -o errexit
+set -o nounset
+
+function progress () { echo -e " \033[1;34m➜\033[0m  $@"; }
+function success ()  { echo -e " \033[1;32m✔\033[0m  $@"; }
+
+# apply yadm specific .gitignore
+# https://github.com/TheLocehiliosan/yadm/issues/98
+progress "apply patterns from .yadm/yadm.gitignore"
+ln --force --symbolic "/home/$USER/.yadm/yadm.gitignore" "/home/$USER/.yadm/repo.git/info/exclude"
+
+success "$(hostname) bootstrapped"

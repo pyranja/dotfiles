@@ -1,0 +1,10 @@
+# ignore patterns specific to yadm
+# copy contents into ~/.yadm/repo.git/info/exclude to apply
+
+# whitelist pattern https://jasonstitt.com/gitignore-whitelisting-patterns
+# ignore everything
+/*
+
+# whitelist
+!.yadm/
+.yadm/repo.git/
