@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Onedrive Sync Daemon
+Comment=https://github.com/xybu/onedrived-dev
+Exec=bash -c "NGROK=/home/py/.local/bin/ngrok /home/py/.local/bin/onedrived start &>> /home/py/.logs/onedrived.autostart.log"

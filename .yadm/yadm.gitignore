@@ -3,8 +3,12 @@
 
 # whitelist pattern https://jasonstitt.com/gitignore-whitelisting-patterns
 # ignore everything
-/*
+*
+# allow recursive descent into hidden folders
+!.*/
+!.*/*/
 
 # whitelist
-!.yadm/
+!.yadm/**
 .yadm/repo.git/
+!.config/autostart/**

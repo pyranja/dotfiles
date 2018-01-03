@@ -1,0 +1,4 @@
+package python3
+sudo --set-home pip install --quiet --upgrade pip setuptools
+
+success "$(python3 --version) | $(pip --version)"
