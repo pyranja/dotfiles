@@ -1,0 +1,8 @@
+# https://keepassxc.org/
+
+if missing keepassxc; then
+    repo ppa:phoerious/keepassxc
+    package keepassxc
+fi
+
+success "$(keepassxc --version)"
