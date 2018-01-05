@@ -6,9 +6,10 @@
 *
 # allow recursive descent into hidden folders
 !.*/
-!.*/*/
+!.*/**/
 
 # whitelist
 !.yadm/**
 .yadm/repo.git/
 !.config/autostart/**
+!.local/share/keyrings/default
