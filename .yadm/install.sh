@@ -11,7 +11,9 @@ function success ()  { echo -e " \033[1;32m✔\033[0m  $@"; }
 
 # ensure prerequisites present
 progress "installing prerequisites"
-sudo apt-get -qq install curl git-core
+sudo add-apt-repository ppa:git-core/ppa >/dev/null 2>&1 \
+    && sudo apt-get -qq update \
+    && sudo apt-get -qq install curl git
 
 # download and verify yadm
 source="https://raw.githubusercontent.com/TheLocehiliosan/yadm/$YADM_VERSION/yadm"

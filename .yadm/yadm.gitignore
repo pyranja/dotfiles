@@ -12,4 +12,5 @@
 !.yadm/**
 .yadm/repo.git/
 !.config/autostart/**
+!.config/git/**
 !.local/share/keyrings/default

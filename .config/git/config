@@ -1,0 +1,40 @@
+[user]
+  name = pyranja
+  email = chris.borckholder@gmail.com
+[core]
+  autocrlf = false
+  eol = lf
+  whitespace = fix,trailing-space,space-before-tab
+  editor = vim
+  excludesfile = ~/.config/git/ignore
+[credential]
+  helper = cache
+[push]
+  default = simple
+  followTags = true
+[pull]
+  ff = only
+[apply]
+  whitespace = fix
+
+[alias]
+  co = checkout
+  st = status -sb
+  ls = log --pretty=format:"%C(yellow)%h%Creset %s %Cred%d" --decorate
+  tree = log --graph --all --oneline --decorate
+  unstage = reset HEAD --
+  fix = commit --amend --no-edit
+
+[status]
+  submodulesummary = 1
+[color]
+  ui = auto
+
+[url "git@github.com:"]
+  insteadOf = "gh:"
+  pushInsteadOf = "github:"
+  pushInsteadOf = "git://github.com/"
+[url "git@gist.github.com:"]
+  insteadOf = "gst:"
+  pushInsteadOf = "gist:"
+  pushInsteadOf = "git://gist.github.com/"

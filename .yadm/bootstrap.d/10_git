@@ -1,0 +1,8 @@
+# https://launchpad.net/~git-core/+archive/ubuntu/ppa
+
+if missing git; then
+    repo ppa:git-core/ppa
+    package git
+fi
+
+success "$(git --version)"
