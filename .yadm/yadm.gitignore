@@ -20,3 +20,4 @@
 # override whitelist to force exclude special folders
 .yadm/repo.git/
 .local/lib/
+.local/share/Trash/
