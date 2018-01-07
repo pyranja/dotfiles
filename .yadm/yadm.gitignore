@@ -13,6 +13,7 @@
 !.config/autostart/**
 !.config/git/**
 !.local/share/keyrings/default
+!.local/bin/spread
 !.bashrc
 !.profile
 !.bash_logout
