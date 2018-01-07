@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+
+EDITORCONFIG=$(cat << EOF
+# http://editorconfig.org
+root = true
+
+[*]
+# force unix endings and utf-8 everywhere
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+
+[Makefile]
+# tabs are syntax elements in make
+indent_style = tab
+
+[*.py]
+# PEP 8 mandates multiples of four as indentation
+indent_size = 4
+
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
+
+[*.{bat,ps1,psm1,psd1,ps1xml}]
+end_of_line = crlf
+
+EOF
+)
+
+GITATTRIBUTES=$(cat << EOF
+# enable git auto handling
+* text=auto
+
+# force endings for some platform specific files
+*.md      eol=lf
+*.sh      eol=lf
+*.xml     eol=lf
+*.json    eol=lf
+*.sql     eol=lf
+*.yaml    eol=lf
+*.yml     eol=lf
+
+*.ps1     eol=crlf
+*.psm1    eol=crlf
+*.psd1    eol=crlf
+*.ps1xml  eol=crlf
+*.bat     eol=crlf
+
+*.pdf     -text
+
+EOF
+)
+
+GITIGNORE=$(cat << EOF
+# project #
+
+# intellij #
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# eclipse #
+.settings/
+.project
+.classpath
+
+# vagrant #
+.vagrant
+
+# osx #
+.DS_Store
+
+EOF
+)
+
+function _init-project () {
+    local target=${1-'.'}
+    git init "$target"
+    echo "$GITIGNORE" > "$target/.gitignore"
+    echo "$GITATTRIBUTES" > "$target/.gitattributes"
+    echo "$EDITORCONFIG" > "$target/.editorconfig"
+}
+
+_init-project "$@"
