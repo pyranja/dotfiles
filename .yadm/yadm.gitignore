@@ -10,7 +10,13 @@
 
 # whitelist
 !.yadm/**
-.yadm/repo.git/
 !.config/autostart/**
 !.config/git/**
 !.local/share/keyrings/default
+!.bashrc
+!.profile
+!.bash_logout
+
+# override whitelist to force exclude special folders
+.yadm/repo.git/
+.local/lib/

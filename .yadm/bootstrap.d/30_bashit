@@ -1,0 +1,9 @@
+# https://github.com/Bash-it/bash-it
+
+if missing bash-it; then
+    git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.local/lib/bash_it
+    ~/.local/lib/bash_it/install.sh --silent --no-modify-config
+    source ~/.bashrc
+fi
+
+sucess "$(bash-it version)"
