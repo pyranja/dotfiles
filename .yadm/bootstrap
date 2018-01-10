@@ -27,7 +27,7 @@ progress "apply patterns from .yadm/yadm.gitignore"
 ln --force --symbolic "/home/$USER/.yadm/yadm.gitignore" "/home/$USER/.yadm/repo.git/info/exclude"
 # show untracked files as we are using a whitelist of managed files
 # https://thelocehiliosan.github.io/yadm/docs/faq
-yadm gitconfig --unset status.showUntrackedFiles
+yadm gitconfig --unset status.showUntrackedFiles || true
 
 for each in /home/$USER/.yadm/bootstrap.d/*; do
     [ -e "$each" ] || continue  # no bootstrap files present
