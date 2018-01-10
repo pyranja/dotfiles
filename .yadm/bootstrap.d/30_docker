@@ -1,0 +1,12 @@
+# https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
+
+if missing docker; then
+    key 'https://download.docker.com/linux/ubuntu/gpg'
+    repo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release --codename --short) stable"
+    package docker-ce
+
+    sudo groupadd docker || true >/dev/null 2>&1
+    sudo usermod --append --groups docker $USER
+fi
+
+success "$(docker --version)"
