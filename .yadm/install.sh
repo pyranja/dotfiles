@@ -11,7 +11,7 @@ function success ()  { echo -e " \033[1;32m✔\033[0m  $@"; }
 
 # ensure prerequisites present
 progress "installing prerequisites"
-sudo add-apt-repository ppa:git-core/ppa >/dev/null 2>&1 \
+sudo add-apt-repository --yes ppa:git-core/ppa \
     && sudo apt-get -qq update \
     && sudo apt-get -qq install curl git
 
