@@ -1,0 +1,4 @@
+# remove unused stuff
+
+# default user folders
+rm -r ~/Music ~/Pictures ~/Public ~/Documents ~/Videos ~/Templates
