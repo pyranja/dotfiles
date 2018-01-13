@@ -12,7 +12,7 @@ success "$(ngrok version)"
 # onedrived
 if missing onedrived; then
     package build-essential python3-dev libssl-dev inotify-tools python3-dbus
-    pip install --quiet --user git+https://github.com/xybu/onedrived-dev.git
+    pip3 install --quiet --user git+https://github.com/xybu/onedrived-dev.git
 
     mkdir -p /home/py/.logs
     onedrived-pref config set logfile_path /home/py/.logs/onedrived.log > /dev/null
