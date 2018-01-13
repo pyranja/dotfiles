@@ -1,4 +1,9 @@
-package python3 python3-pip
-sudo --set-home pip3 install --quiet --upgrade pip setuptools
+if missing python3; then
+  package python3 python3-pip
+fi
+
+if missing pip3; then
+  sudo --set-home pip3 install --quiet --upgrade pip setuptools
+fi
 
 success "$(python3 --version) | $(pip3 --version)"
