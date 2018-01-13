@@ -1,0 +1,7 @@
+if missing google-chrome; then
+  key 'https://dl-ssl.google.com/linux/linux_signing_key.pub'
+  repo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main'
+  package google-chrome-stable
+fi
+
+success "$(google-chrome --version)"
