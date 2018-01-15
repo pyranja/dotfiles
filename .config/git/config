@@ -38,3 +38,7 @@
   insteadOf = "gst:"
   pushInsteadOf = "gist:"
   pushInsteadOf = "git://gist.github.com/"
+
+[include]
+  path = ~/.gitconfig.local
+
