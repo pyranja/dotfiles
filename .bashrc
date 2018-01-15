@@ -27,6 +27,9 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
+# include local executables
+export PATH="/home/py/.local/bin:$PATH"
+
 # Path to the bash it configuration
 export BASH_IT="/home/py/.local/lib/bash_it"
 

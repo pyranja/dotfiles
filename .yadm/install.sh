@@ -28,5 +28,7 @@ local_bin="/home/$USER/.local/bin"
 executable="$local_bin/$YADM_COMMAND"
 progress "installing in $local_bin"
 mkdir -p "$local_bin" && mv "$stash" "$executable" && chmod u+x "$executable"
+# ensure yadm is present on path for this session
+export PATH="$local_bin:$PATH"
 
 success "installed $(yadm version)"
