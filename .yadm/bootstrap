@@ -13,7 +13,7 @@ function repo () { sudo add-apt-repository --yes --update "$@" > /dev/null 2>&1;
 # fetch url checksum target
 function fetch () {
     progress "fetching $1"
-    curl --create-dirs --fail --show-error --silent --output "$3" --url "$1"
+    curl --create-dirs --fail --show-error --silent --output "$3" --location --url "$1"
     echo "$2  $3" | sha256sum --strict --check --quiet
 }
 
