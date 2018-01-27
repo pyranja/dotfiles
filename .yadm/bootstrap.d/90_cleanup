@@ -1,6 +1,6 @@
 # remove unused stuff
 
 # default user folders
-rm -r ~/Music ~/Pictures ~/Public ~/Documents ~/Videos ~/Templates || true
+rm -r examples.desktop ~/Music ~/Pictures ~/Public ~/Documents ~/Videos ~/Templates || true
 
 sudo apt-get --yes --quiet purge firefox
