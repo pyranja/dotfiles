@@ -1,0 +1,7 @@
+if missing vboxmanage; then
+  key 'https://www.virtualbox.org/download/oracle_vbox_2016.asc'
+  repo "deb https://download.virtualbox.org/virtualbox/debian $(lsb_release --codename --short) contrib"
+  package dkms virtualbox-5.2
+fi
+
+success "virtualbox $(vboxmanage --version)"
