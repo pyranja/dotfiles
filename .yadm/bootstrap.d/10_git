@@ -6,3 +6,13 @@ if missing git; then
 fi
 
 success "$(git --version)"
+
+# https://github.com/github/hub/releases
+
+if missing hub; then
+    fetch 'https://github.com/github/hub/releases/download/v2.2.9/hub-linux-amd64-2.2.9.tgz' '5867647071007add582f911867fb4973354c51690ac20aecb2e73be7440875a3' '/tmp/hub.tgz'
+    tar --extract --directory="/home/$USER/.local/lib" --file='/tmp/hub.tgz' && rm '/tmp/hub.tgz'
+    ln --symbolic --force "/home/$USER/.local/lib/hub-linux-amd64-2.2.9/bin/hub" "/home/$USER/.local/bin/hub"
+fi
+
+success "$(hub --version)"
