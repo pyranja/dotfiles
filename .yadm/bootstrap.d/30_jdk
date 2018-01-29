@@ -1,0 +1,13 @@
+if missing javac; then
+    package openjdk-8-jdk
+fi
+
+success "$(java -version)"
+
+if missing mvn; then
+    fetch 'http://mirror.klaus-uwe.me/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz' '707b1f6e390a65bde4af4cdaf2a24d45fc19a6ded00fff02e91626e3e42ceaff' '/tmp/maven.tgz'
+    tar --extract --directory="/home/$USER/.local/lib" --file='/tmp/maven.tgz' && rm '/tmp/maven.tgz'
+    ln --symbolic --force "/home/$USER/.local/lib/apache-maven-3.5.2/bin/mvn" "/home/$USER/.local/bin/mvn"
+fi
+
+success "$(mvn -v)"
