@@ -30,6 +30,11 @@
 [color]
   ui = auto
 
+[merge]
+  tool = vscode
+[mergetool "vscode"]
+  cmd = code --wait $MERGED
+
 [url "git@github.com:"]
   insteadOf = "gh:"
   pushInsteadOf = "github:"
