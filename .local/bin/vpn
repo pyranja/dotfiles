@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+
+# shortcut to start/stop the openvpn client
+
+command=${1-'status'}
+
+sudo systemctl $command openvpn@client
+

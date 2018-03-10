@@ -15,6 +15,7 @@
 !.local/share/keyrings/default
 !.local/bin/spread
 !.local/bin/init-project
+!.local/bin/vpn
 !.bashrc
 !.profile
 !.bash_logout
