@@ -24,3 +24,4 @@
 .yadm/repo.git/
 .local/lib/
 .local/share/Trash/
+.config/git/gitk
