@@ -7,4 +7,8 @@ if missing pip3; then
   sudo --set-home pip3 install --quiet --upgrade pip setuptools
 fi
 
+if missing venv; then
+  package python3-venv
+fi
+
 success "$(python3 --version) | $(pip3 --version)"
