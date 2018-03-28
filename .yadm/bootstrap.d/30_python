@@ -1,14 +1,20 @@
 if missing python3; then
-  package python3
+  # include dev dependencies needed to build pip modules
+  package python3 python3-dev
 fi
+
+# header files needed to build pip modules
+package python-dev
 
 if missing pip3; then
   package python3-pip
   sudo --set-home pip3 install --quiet --upgrade pip setuptools
 fi
 
-if missing venv; then
+if missing pipenv; then
+  # used to install python versions on the fly
   package python3-venv
+  pip3 install --quiet --user pipenv
 fi
 
-success "$(python3 --version) | $(pip3 --version)"
+success "$(python3 --version) | $(pip3 --version) | $(pipenv --version)"
