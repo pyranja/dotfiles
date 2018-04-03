@@ -1,0 +1,6 @@
+if missing jetbrains-toolbox; then
+    fetch 'https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.8.3678.tar.gz' 'bb98b94fa714ca07db31ac5bb42fbba2eac610c360541848e59adf0f8d84cefb' '/tmp/jetbrains-toolbox.tgz'
+    tar --extract --directory="/home/$USER/.local/bin/" --strip 1 --file='/tmp/jetbrains-toolbox.tgz' && rm '/tmp/jetbrains-toolbox.tgz'
+fi
+
+success "$(jetbrains-toolbox --version)"
