@@ -5,11 +5,13 @@ if missing docker; then
     repo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release --codename --short) stable"
     package docker-ce
 
-    fetch 'https://github.com/docker/compose/releases/download/1.18.0/docker-compose-Linux-x86_64' 'b2f2c3834107f526b1d9cc8d8e0bdd132c6f1495b036a32cbc61b5288d2e2a01' "/home/$USER/.local/bin/docker-compose"
-    sudo chmod u+x /home/$USER/.local/bin/docker-compose
-
     sudo groupadd docker || true >/dev/null 2>&1
     sudo usermod --append --groups docker $USER
+fi
+
+if missing docker-compose; then
+    fetch 'https://github.com/docker/compose/releases/download/1.20.1/docker-compose-Linux-x86_64' '11a6923c2a589b946598fe205c8f645e57f3f4ee153d3b7315b7e1993c1b2ad1' "/home/$USER/.local/bin/docker-compose"
+    sudo chmod u+x /home/$USER/.local/bin/docker-compose
 fi
 
 success "$(docker --version)"
