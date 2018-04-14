@@ -2,4 +2,5 @@ if missing vim; then
   package vim
 fi
 
-success "$(vim --version)"
+# vim --version is very verbose
+success "$(vim --version | head -n 1)"
