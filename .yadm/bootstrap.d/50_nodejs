@@ -1,0 +1,9 @@
+if missing node; then
+  key 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key'
+  repo "deb https://deb.nodesource.com/node_8.x $(lsb_release -s -c) main"
+  # build-essentials needed to build native modules
+  package build-essential nodejs
+fi
+
+success "node $(node --version)"
+success "npm $(npm --version)"
