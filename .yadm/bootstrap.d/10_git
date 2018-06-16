@@ -16,3 +16,10 @@ if missing hub; then
 fi
 
 success "$(hub --version)"
+
+# create local git config override if not present
+
+if [[ ! -f ~/.gitconfig.local ]]; then
+    echo '# local git config overrides' > ~/.gitconfig.local
+    success "created ~/.gitconfig.local"
+fi
