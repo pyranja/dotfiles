@@ -19,6 +19,7 @@
 !.bashrc
 !.profile
 !.bash_logout
+!.tmux.conf
 
 # override whitelist to force exclude special folders
 .yadm/repo.git/

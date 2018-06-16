@@ -1,0 +1,5 @@
+if missing tmux; then
+    package tmux
+fi
+
+success "$(tmux -V)"
