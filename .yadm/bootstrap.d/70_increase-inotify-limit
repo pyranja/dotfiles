@@ -1,0 +1,11 @@
+# IntelliJ requires a large number of file watches
+# https://confluence.jetbrains.com/display/IDEADEV/Inotify+Watches+Limit
+
+IDEA_OPTIONS=/etc/sysctl.d/50-idea.conf
+if [ ! -f /etc/sysctl.d/idea.conf ]; then
+    sudo touch "$IDEA_OPTIONS" && sudo chown root:root "$IDEA_OPTIONS"
+    echo 'fs.inotify.max_user_watches = 524288' | sudo tee "$IDEA_OPTIONS" > /dev/null
+    sudo sysctl --load="$IDEA_OPTIONS" --system
+fi
+
+success "inotify limit increased"
