@@ -4,3 +4,6 @@
 rm -r examples.desktop ~/Music ~/Pictures ~/Public ~/Documents ~/Videos ~/Templates 2>/dev/null || true
 
 sudo apt-get --yes --quiet purge firefox
+
+# remove unused apt packages
+sudo apt autoremove
