@@ -4,6 +4,10 @@ case $- in
       *) return;;
 esac
 
+if command -v tmux>/dev/null; then
+	[[ ! $TERM =~ screen ]] && [ -z $TMUX ] && { tmux attach || exec tmux new-session && exit; }
+fi
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
