@@ -12,6 +12,7 @@
 !.yadm/**
 !.config/autostart/**
 !.config/git/**
+!.config/jvm/**
 !.local/share/keyrings/default
 !.local/bin/spread
 !.local/bin/init-project
