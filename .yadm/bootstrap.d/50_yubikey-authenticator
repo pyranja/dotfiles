@@ -1,0 +1,7 @@
+if missing ykman; then
+    repo ppa:yubico/stable
+    package yubioath-desktop
+    package yubikey-manager
+fi
+
+success "$(ykman --version)"
