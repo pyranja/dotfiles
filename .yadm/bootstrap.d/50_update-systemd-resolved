@@ -1,0 +1,4 @@
+# https://github.com/jonathanio/update-systemd-resolved
+package openvpn-systemd-resolved
+
+success "installed update-systemd-resolved"
