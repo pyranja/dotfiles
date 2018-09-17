@@ -1,0 +1,8 @@
+# https://www.terraform.io/intro/getting-started/install.html
+
+if missing terraform; then
+    fetch 'https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd64.zip' '84ccfb8e13b5fce63051294f787885b76a1fedef6bdbecf51c5e586c9e20c9b7' '/tmp/terraform.zip'
+    unzip -uoq '/tmp/terraform.zip' -d "/home/$USER/.local/bin/" && rm '/tmp/terraform.zip'
+fi
+
+success "$(terraform --version)"
