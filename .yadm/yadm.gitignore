@@ -24,6 +24,7 @@
 
 # override whitelist to force exclude special folders
 .yadm/repo.git/
+.yadm/module-signing/MOK.*
 .local/lib/
 .local/share/Trash/
 .config/git/gitk
