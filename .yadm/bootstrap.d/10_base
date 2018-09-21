@@ -6,3 +6,7 @@ package \
     curl \
     ldnsutils \
     software-properties-common
+
+# setup .local folder
+mkdir -p /home/$USER/.local/bin
+mkdir -p /home/$USER/.local/lib
