@@ -2,9 +2,46 @@
 set -o errexit
 set -o nounset
 
-# shortcut to start/stop the openvpn client
+# manage multiple openvpn connections
 
-command=${1-'status'}
+function main() {
+  command=${1-'help'}
+  case $command in
+    # handle special commands first
+    list) list ;;
+    clear) clear ;;
+    help) usage ;;
+    # forward others to systemctl
+    *)
+      env=${2?'ERROR no environment given: vpn <command> <environment>'}
+      delegate $command $2
+      ;;
+  esac
+}
 
-sudo systemctl $command openvpn@client
+function usage() {
+  echo "$0 <command> [<environment>]"
+  echo "  list - list status of vpn environments"
+  echo "  clear - stop all vpn connections"
+  echo "  help - show this message"
+  echo "  <command> - call command on vpn service"
+}
 
+function list() {
+  for config_file in $(ls /etc/openvpn/*.conf); do
+    # expect <env>.conf naming convention - same as systemd
+    env=$(basename $config_file | cut -d'.' -f1)
+    echo "$env - $(systemctl is-active openvpn@$env)"
+  done
+}
+
+function clear() {
+  systemctl stop openvpn@*
+  list
+}
+
+function delegate() {
+  systemctl "$command" openvpn@"$env"
+}
+
+main "$@"
