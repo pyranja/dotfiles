@@ -1,0 +1,42 @@
+#!/bin/bash
+set -o errexit
+set -o nounset
+[[ -v DEBUG ]] && set -o xtrace
+
+function usage() {
+  echo "$0 <command>"
+  echo "  clone <group> - clone all projects in the given group into the current directory"
+}
+
+: ${GITLAB_API_TOKEN?'private access token is not set'}
+: ${GITLAB_API_URI='https://buildpanda.wtf/api/v4'}
+
+CURL_OPTS=(--silent --show-error --fail --header "Private-Token: ${GITLAB_API_TOKEN}")
+
+function clone() {
+  readonly group=${1?'missing group: $0 clone <group>'}
+  readonly json=$(\
+    curl "${CURL_OPTS[@]}" --request GET ${GITLAB_API_URI}/groups/${group}/projects?simple=true \
+      | jq --raw-output --compact-output '.[] | {path, ssh_url_to_repo}'\
+  )
+  for project in $(echo "${json}"); do
+    local name=$(echo "${project}" | jq --raw-output '.path | @uri')
+    local uri=$(echo "${project}" | jq --raw-output '.ssh_url_to_repo')
+    local folder=${name#'xchg-'}
+    local folder=${folder%'-root'}
+    echo "cloning ${name} from ${uri} into $(pwd)/${folder}"
+    git clone --recurse-submodules "${uri}" "${folder}"
+  done
+}
+
+function main() {
+  local command=${1-'none'}
+  shift || true
+  case "${command}" in
+    clone) clone "$@" ;;
+    help) usage ;;
+    *) usage; exit 1 ;;
+  esac
+}
+
+main "$@"
