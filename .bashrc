@@ -86,6 +86,11 @@ export SCM_CHECK=true
 source "$BASH_IT"/bash_it.sh
 
 # include hub completion
-if [ -f /home/py/.local/lib/hub-linux-amd64-2.2.9/etc/hub.bash_completion.sh ]; then
-    . /home/py/.local/lib/hub-linux-amd64-2.2.9/etc/hub.bash_completion.sh
+if [ -f /home/"$USER"/.local/lib/hub-linux-amd64-2.2.9/etc/hub.bash_completion.sh ]; then
+    . /home/"$USER"/.local/lib/hub-linux-amd64-2.2.9/etc/hub.bash_completion.sh
+fi
+
+# include local init file
+if [ -f /home/"$USER"/.bashrc.local ]; then
+    . /home/"$USER"/.bashrc.local
 fi
