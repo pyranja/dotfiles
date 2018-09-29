@@ -1,21 +1,19 @@
 #!/bin/bash
 set -o errexit
 set -o nounset
+[[ -v DEBUG ]] && set -o xtrace
 
 # manage multiple openvpn connections
 
 function main() {
-  command=${1-'help'}
+  local command=${1-'help'}
   case $command in
     # handle special commands first
     list) list ;;
     clear) clear ;;
     help) usage ;;
     # forward others to systemctl
-    *)
-      env=${2?'ERROR no environment given: vpn <command> <environment>'}
-      delegate $command $2
-      ;;
+    *) delegate "$@" ;;
   esac
 }
 
@@ -41,6 +39,8 @@ function clear() {
 }
 
 function delegate() {
+  local command=${1?"missing command: $0 <command> <environment>"}
+  local env=${2?"missing environment: $0 <command> <environment>"}
   systemctl "$command" openvpn@"$env"
 }
 
