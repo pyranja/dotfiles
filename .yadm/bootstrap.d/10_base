@@ -4,6 +4,7 @@ package \
     apt-transport-https \
     ca-certificates \
     curl \
+    jq \
     ldnsutils \
     software-properties-common
 
