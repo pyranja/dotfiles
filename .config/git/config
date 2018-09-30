@@ -18,12 +18,16 @@
   whitespace = fix
 
 [alias]
+  ap = add --patch
   co = checkout
-  st = status -sb
-  ls = log --pretty=format:"%C(yellow)%h%Creset %s %Cred%d" --decorate
+  ds = diff --staged
+  st = status --short --branch
+  ls = log --pretty=format:'%C(yellow)%h %C(green)%ad%C(red)%d %C(reset)%s%C(blue) [%cn]' --decorate --date=relative
+  ll = log --pretty=format:'%C(yellow)%h %C(green)%ad%C(red)%d %C(reset)%s%C(blue) [%cn]' --decorate --date=relative --numstat
   tree = log --graph --all --oneline --decorate
-  unstage = reset HEAD --
   fix = commit --amend --no-edit
+  wip = commit --all --message="WIP"
+  b = "!git for-each-ref --color --sort='-authordate' --format='%(color:yellow)%(objectname:short)%09%(color:green)%(authordate:relative)%09%(color:red)%(refname:strip=-1) %(color:blue)%(upstream:trackshort) %(upstream:short)%09%(color:reset)%(subject)' refs/heads"
 
 [status]
   submodulesummary = 1
@@ -47,3 +51,5 @@
 [include]
   path = ~/.gitconfig.local
 
+[fetch]
+	prune = true
