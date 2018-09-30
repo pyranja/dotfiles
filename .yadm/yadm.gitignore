@@ -17,7 +17,7 @@
 !.local/bin/spread
 !.local/bin/init-project
 !.local/bin/vpn
-!.local/bin/gitlab
+!.local/bin/lab
 !.bashrc
 !.profile
 !.bash_logout
