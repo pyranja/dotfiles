@@ -21,7 +21,7 @@ function clean() {
   git pull
   git branch --merged \
     | egrep --invert-match "(^\*|master|production|staging)" \
-    | xargs --max-args=1 git branch --delete
+    | xargs --max-args=1 --no-run-if-empty --interactive git branch --delete
 }
 
 # clone all projects in a gitlab group
