@@ -6,6 +6,7 @@ set -o nounset
 function usage() {
   echo "$0 <command>"
   echo "  clone <group> - clone all projects in the given group into the current directory"
+  echo "  clean - delete merged local branches"
 }
 
 : ${GITLAB_API_TOKEN?'private access token is not set'}
@@ -13,6 +14,17 @@ GITLAB_API_URI="${GITLAB_HOST?'gitlab host is not set'}/api/v4"
 
 CURL_OPTS=(--silent --show-error --fail --header "Private-Token: ${GITLAB_API_TOKEN}")
 
+# delete merged local branches
+function clean() {
+  git fetch --prune --all
+  git checkout master
+  git pull
+  git branch --merged \
+    | egrep --invert-match "(^\*|master|production|staging)" \
+    | xargs --max-args=1 git branch --delete
+}
+
+# clone all projects in a gitlab group
 function clone() {
   readonly group=${1?'missing group: $0 clone <group>'}
   readonly json=$(\
@@ -34,6 +46,7 @@ function main() {
   shift || true
   case "${command}" in
     clone) clone "$@" ;;
+    clean) clean ;;
     help) usage ;;
     *) usage; exit 1 ;;
   esac
