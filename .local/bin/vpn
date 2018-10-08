@@ -34,14 +34,20 @@ function list() {
 }
 
 function clear() {
-  systemctl stop openvpn@*
+  elevate
+  sudo systemctl stop openvpn@*
   list
 }
 
 function delegate() {
+  elevate
   local command=${1?"missing command: $0 <command> <environment>"}
   local env=${2?"missing environment: $0 <command> <environment>"}
-  systemctl "$command" openvpn@"$env"
+  sudo systemctl "$command" openvpn@"$env"
+}
+
+function elevate() {
+  if [[ ! $(sudo echo 0) ]]; then exit 1; fi
 }
 
 main "$@"
