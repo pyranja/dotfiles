@@ -16,7 +16,7 @@ CURL_OPTS=(--silent --show-error --fail --header "Private-Token: ${GITLAB_API_TO
 
 # delete merged local branches
 function clean() {
-  git fetch --prune --all
+  git fetch --prune --prune-tags --tags --all
   git checkout master
   git pull
   git branch --merged \
