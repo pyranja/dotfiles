@@ -6,6 +6,7 @@ set -o nounset
 function usage() {
   echo "$0 <command>"
   echo "  clone <group> - clone all projects in the given group into the current directory"
+  echo "  sync [<branch>] - pull latest changes for given branch (by default master)"
   echo "  clean - delete merged local branches"
 }
 
@@ -13,6 +14,17 @@ function usage() {
 GITLAB_API_URI="${GITLAB_HOST?'gitlab host is not set'}/api/v4"
 
 CURL_OPTS=(--silent --show-error --fail --header "Private-Token: ${GITLAB_API_TOKEN}")
+
+# pull branch if already on it otherwise fetch into it
+function sync() {
+  readonly target_branch=${1-'master'}
+  if [ "${target_branch}" == "$(git rev-parse --abbrev-ref HEAD)" ]; then
+    git fetch --tags
+    git pull
+  else
+    git fetch --tags origin "${target_branch}:${target_branch}"
+  fi
+}
 
 # delete merged local branches
 function clean() {
@@ -46,6 +58,7 @@ function main() {
   shift || true
   case "${command}" in
     clone) clone "$@" ;;
+    sync) sync "$@" ;;
     clean) clean ;;
     help) usage ;;
     *) usage; exit 1 ;;
