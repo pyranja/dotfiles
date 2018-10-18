@@ -1,5 +1,5 @@
 if missing vagrant; then
-    fetch 'https://releases.hashicorp.com/vagrant/2.0.3/vagrant_2.0.3_x86_64.deb' '47ea8af7644616caf36d421ecf2e0aceb1f5095933a2bfc2d50b7b8bae35d93f' '/tmp/vagrant.deb'
+    fetch 'https://releases.hashicorp.com/vagrant/2.2.0/vagrant_2.2.0_x86_64.deb' 'f1caad948a8f545d5d7d2442396fe8a3bcdfd0fc8f643bd0576c81942e7be43b' '/tmp/vagrant.deb'
     sudo apt install /tmp/vagrant.deb && rm /tmp/vagrant.deb
 fi
 
