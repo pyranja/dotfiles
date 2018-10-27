@@ -1,0 +1,9 @@
+# https://docs.gitlab.com/runner/install/linux-repository.html
+
+if missing gitlab-runner; then
+  key 'https://packages.gitlab.com/runner/gitlab-runner/gpgkey'
+  repo "deb https://packages.gitlab.com/runner/gitlab-runner/ubuntu/ $(lsb_release --codename --short) main"
+  package gitlab-runner
+fi
+
+success "gitlab-runner $(gitlab-runner --version)"
