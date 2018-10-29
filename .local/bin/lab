@@ -106,7 +106,7 @@ function main() {
   case "${command}" in
     clone) clone "$@" ;;
     sync) sync "$@" ;;
-    clean) clean ;;
+    clean) clean "$@" ;;
     exec) exec "$@" ;;
     help) usage ;;
     *) usage; exit 1 ;;
