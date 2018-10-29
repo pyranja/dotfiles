@@ -7,17 +7,23 @@ function usage() {
   echo "$0 <command>"
   echo "  clone <group> - clone all projects in the given group into the current directory"
   echo "  sync [<branch>] - pull latest changes for given branch (by default master)"
-  echo "  clean - delete merged local branches"
+  echo "  clean [<base-branch>] - delete merged local branches (by default using master as base)"
 }
 
 : ${GITLAB_API_TOKEN?'private access token is not set'}
 GITLAB_API_URI="${GITLAB_HOST?'gitlab host is not set'}/api/v4"
 
 CURL_OPTS=(--silent --show-error --fail --header "Private-Token: ${GITLAB_API_TOKEN}")
+LAB_HOME="/home/${USER}/.lab"
+
+function die() {
+  >&2 echo "$@"
+  exit 1
+}
 
 # pull branch if already on it otherwise fetch into it
 function sync() {
-  readonly target_branch=${1-'master'}
+  declare -r target_branch=${1-'master'}
   if [ "${target_branch}" == "$(git rev-parse --abbrev-ref HEAD)" ]; then
     git fetch --tags
     git pull
@@ -28,8 +34,9 @@ function sync() {
 
 # delete merged local branches
 function clean() {
+  declare -r target_branch=${1-'master'}
   git fetch --prune --prune-tags --tags --all
-  git checkout master
+  git checkout "${target_branch}"
   git pull
   git branch --merged \
     | egrep --invert-match "(^\*|master|production|staging)" \
@@ -38,8 +45,8 @@ function clean() {
 
 # clone all projects in a gitlab group
 function clone() {
-  readonly group=${1?'missing group: $0 clone <group>'}
-  readonly json=$(\
+  declare -r group=${1?'missing group: $0 clone <group>'}
+  declare -r json=$(\
     curl "${CURL_OPTS[@]}" --request GET ${GITLAB_API_URI}/groups/${group}/projects?simple=true \
       | jq --raw-output --compact-output '.[] | {path, ssh_url_to_repo}'\
   )
@@ -53,6 +60,46 @@ function clone() {
   done
 }
 
+# execute a gitlab pipeline job locally
+function exec() {
+  declare -r job=${1?'missing job name: $0 exec <job>'}
+
+  # exit early if in wrong folder (avoid temp folder creation)
+  [[ -f .gitlab-ci.yml ]] || die "no local .gitlab-ci.yml found - are you in a project root folder?"
+  [[ -d .git ]] || die "not in a git repository - have you checked out the project?"
+
+  # check additional env parameters
+  : ${GITLAB_USER?'gitlab user is not set'}
+  : ${GITLAB_REGISTRY?'gitlab registry is not set'}
+
+  # prepare local working folders
+  declare -r global_cache_dir="${LAB_HOME}/cache"
+  mkdir -p "${global_cache_dir}"
+
+  # resolve some gitlab environment variables
+  declare -r ci_project_path="$(git remote get-url origin | sed --regexp-extended --expression 's|.*://[^/]+/||' --expression 's|\.git||' | tr '[:upper:]' '[:lower:]')"
+  declare -r ci_project_name="$(basename ${ci_project_path})"
+  declare -r ci_project_namespace="$(dirname ${ci_project_path})"
+
+  gitlab-runner exec docker \
+    --builds-dir='/build' \
+    --cache-dir='/cache' \
+    --docker-privileged \
+    --docker-volumes "${global_cache_dir}:/cache" \
+    --docker-volumes '/var/run/docker.sock:/var/run/docker.sock' \
+    --env 'CI_PIPELINE_ID=0' \
+    --env 'CI_PIPELINE_IID=0' \
+    --env "CI_PROJECT_NAME=${ci_project_name}" \
+    --env "CI_PROJECT_NAMESPACE=${ci_project_namespace}" \
+    --env "CI_PROJECT_PATH=${ci_project_path}" \
+    --env "CI_JOB_TOKEN=${GITLAB_API_TOKEN}" \
+    --env "CI_REGISTRY=${GITLAB_REGISTRY}" \
+    --env "CI_REGISTRY_USER=${GITLAB_USER}" \
+    --env "CI_REGISTRY_PASSWORD=${GITLAB_API_TOKEN}" \
+    --env "CI_REGISTRY_IMAGE=${GITLAB_REGISTRY}/${ci_project_path}" \
+    "${job}"
+}
+
 function main() {
   local command=${1-'none'}
   shift || true
@@ -60,6 +107,7 @@ function main() {
     clone) clone "$@" ;;
     sync) sync "$@" ;;
     clean) clean ;;
+    exec) exec "$@" ;;
     help) usage ;;
     *) usage; exit 1 ;;
   esac
