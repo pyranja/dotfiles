@@ -1,7 +1,10 @@
 # https://www.terraform.io/intro/getting-started/install.html
 
+VERSION='0.11.10'
+SHA_256='43543a0e56e31b0952ea3623521917e060f2718ab06fe2b2d506cfaa14d54527'
+
 if missing terraform; then
-    fetch 'https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd64.zip' '84ccfb8e13b5fce63051294f787885b76a1fedef6bdbecf51c5e586c9e20c9b7' '/tmp/terraform.zip'
+    fetch "https://releases.hashicorp.com/terraform/${VERSION}/terraform_${VERSION}_linux_amd64.zip" "${SHA_256}" '/tmp/terraform.zip'
     unzip -uoq '/tmp/terraform.zip' -d "/home/$USER/.local/bin/" && rm '/tmp/terraform.zip'
 fi
 
