@@ -1,0 +1,10 @@
+# https://learning.getpostman.com/docs/postman/launching_postman/installation_and_updates/
+# https://www.getpostman.com/apps#changelog
+
+if [ ! -f "/home/$USER/.local/share/Postman/app/Postman" ]; then
+  package 'libgconf-2-4'
+  fetch 'https://dl.pstmn.io/download/version/6.5.2/linux64' '384e7cb3f8b8ddc83fd08c82a5d360ea0539c238a21f44a1bb000d3f5ea7634e' '/tmp/postman.tgz'
+  tar --extract --directory="/home/$USER/.local/share" --file='/tmp/postman.tgz' && rm '/tmp/postman.tgz'
+fi
+
+success "postman $(cat /home/$USER/.local/share/Postman/app/version)"

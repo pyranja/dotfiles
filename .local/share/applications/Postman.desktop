@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Postman
+Exec=/home/py/.local/share/Postman/app/Postman %U
+Icon=/home/py/.local/share/Postman/app/resources/app/assets/icon.png
+Terminal=false
+Type=Application
+Categories=Development;
+MimeType=x-scheme-handler/postman;text/html;

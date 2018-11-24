@@ -14,6 +14,7 @@
 !.config/git/**
 !.config/jvm/**
 !.local/share/keyrings/default
+!.local/share/applications/Postman.desktop
 !.local/bin/spread
 !.local/bin/init-project
 !.local/bin/vpn
