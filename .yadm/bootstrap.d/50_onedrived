@@ -14,8 +14,8 @@ if missing onedrived; then
     package build-essential python3-dev libssl-dev inotify-tools python3-dbus
     pip3 install --quiet --user git+https://github.com/xybu/onedrived-dev.git
 
-    mkdir -p /home/py/.logs
-    onedrived-pref config set logfile_path /home/py/.logs/onedrived.log > /dev/null
+    mkdir -p "/home/$USER/.logs"
+    onedrived-pref config set logfile_path "/home/$USER/.logs/onedrived.log" > /dev/null
 
     warning "run onedrived-pref account add and onedrived-pref drive set to configure one drive daemon"
 fi

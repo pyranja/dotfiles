@@ -1,0 +1,10 @@
+# https://github.com/pyranja/dotfiles travis pipeline
+
+dist: xenial
+language: bash
+
+install:
+  - curl https://raw.githubusercontent.com/pyranja/dotfiles/master/.yadm/install.sh | bash
+
+script:
+  - yadm clone --bootstrap https://github.com/pyranja/dotfiles.git

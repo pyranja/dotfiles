@@ -23,6 +23,7 @@
 !.profile
 !.bash_logout
 !.tmux.conf
+!./.travis.yml
 
 # override whitelist to force exclude special folders
 .yadm/repo.git/

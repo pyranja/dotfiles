@@ -1,4 +1,9 @@
 # https://github.com/jonathanio/update-systemd-resolved
-package openvpn-systemd-resolved
 
-success "installed update-systemd-resolved"
+if apt-cache show openvpn-systemd-resolved; then
+  package openvpn-systemd-resolved
+
+  success "installed update-systemd-resolved"
+else
+  warning "skipped update-systemd-resolved -- not available"
+fi
