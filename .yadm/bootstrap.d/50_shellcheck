@@ -1,0 +1,5 @@
+# https://github.com/koalaman/shellcheck#installing
+
+package shellcheck
+
+success "$(shellcheck --version)"
