@@ -6,8 +6,8 @@ YADM_VERSION='1.12.0'
 YADM_CHECKSUM='5d1fb19a0a10679908df8cf1864659aedd7ff699c4a6178cf1a7c65cec569f44'
 YADM_COMMAND='yadm'
 
-function progress () { echo -e " \033[1;34m➜\033[0m  $@"; }
-function success ()  { echo -e " \033[1;32m✔\033[0m  $@"; }
+function progress () { echo -e " \033[1;34m➜\033[0m  $*"; }
+function success ()  { echo -e " \033[1;32m✔\033[0m  $*"; }
 
 # ensure prerequisites present
 progress "installing prerequisites"

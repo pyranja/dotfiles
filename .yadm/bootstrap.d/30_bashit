@@ -1,6 +1,6 @@
 # https://github.com/Bash-it/bash-it
 
-if [ -z ${BASH_IT+x} ]; then
+if [ -z "${BASH_IT+x}" ]; then
     git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.local/lib/bash_it
     ~/.local/lib/bash_it/install.sh --silent --no-modify-config
 fi

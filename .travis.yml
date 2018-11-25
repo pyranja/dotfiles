@@ -7,4 +7,5 @@ install:
   - curl https://raw.githubusercontent.com/pyranja/dotfiles/master/.yadm/install.sh | bash
 
 script:
+  - shellcheck --shell=bash .yadm/install.sh .yadm/bootstrap .yadm/bootstrap.d/*
   - yadm clone --bootstrap https://github.com/pyranja/dotfiles.git
