@@ -1,0 +1,10 @@
+# https://github.com/sharkdp/bat
+
+BAT_VERSION='0.9.0'
+
+if missing bat; then
+  fetch 'https://github.com/sharkdp/bat/releases/download/v0.9.0/bat_0.9.0_amd64.deb' '0b97d912d57eb0504d4e81cafedb23991d5c927a2099c0c152575b2d956bcec5' '/tmp/bat.deb'
+  sudo apt install /tmp/bat.deb && rm /tmp/bat.deb
+fi
+
+success "$(bat --version)"

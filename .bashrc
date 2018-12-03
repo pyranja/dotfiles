@@ -98,6 +98,10 @@ if command -v gopass >/dev/null; then
     source <(gopass completion bash)
 fi
 
+if command -v bat >/dev/null; then
+    alias cat='bat'
+fi
+
 # include local init file
 if [ -f /home/"$USER"/.bashrc.local ]; then
     . /home/"$USER"/.bashrc.local
