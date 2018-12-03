@@ -1,0 +1,9 @@
+# https://github.com/gopasspw/gopass/blob/master/docs/setup.md
+
+if missing gopass; then
+  key 'https://api.bintray.com/orgs/gopasspw/keys/gpg/public.key'
+  repo "deb https://dl.bintray.com/gopasspw/gopass $(lsb_release --codename --short) main"
+  package gnupg git rng-tools gopass
+fi
+
+success "$(gopass --version)"

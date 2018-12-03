@@ -85,9 +85,17 @@ export SCM_CHECK=true
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
 
+# the one and only
+export EDITOR=vim
+
 # include hub completion
 if [ -f /home/"$USER"/.local/lib/hub-linux-amd64-2.2.9/etc/hub.bash_completion.sh ]; then
     . /home/"$USER"/.local/lib/hub-linux-amd64-2.2.9/etc/hub.bash_completion.sh
+fi
+
+# include gopass completion
+if command -v gopass >/dev/null; then
+    source <(gopass completion bash)
 fi
 
 # include local init file
