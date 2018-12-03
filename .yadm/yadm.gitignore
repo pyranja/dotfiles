@@ -31,3 +31,4 @@
 .local/lib/
 .local/share/Trash/
 .config/git/gitk
+.password-store*
