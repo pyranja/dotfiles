@@ -1,0 +1,8 @@
+# https://github.com/esphen/wsta/releases
+
+if missing wsta; then
+  fetch 'https://github.com/esphen/wsta/releases/download/0.5.0/wsta-0.5.0-x86_64-unknown-linux-gnu.tar.gz' '32afa55ea6975b34fe7b81fb28f85d24ea57a9b19b9b4cb1bf5503b33d9f5b33' '/tmp/wsta.tgz'
+  tar --extract --directory="/home/$USER/.local/bin" --file='/tmp/wsta.tgz' && rm '/tmp/wsta.tgz'
+fi
+
+success "$(wsta --version)"
