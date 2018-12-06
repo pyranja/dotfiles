@@ -6,6 +6,7 @@ set -o nounset
 function usage() {
   echo "$0 <command>"
   echo "  clone <group> - clone all projects in the given group into the current directory"
+  echo "  mirror <module> - create a new git mirror for a gruntwork repository"
   echo "  sync [<branch>] - pull latest changes for given branch (by default master)"
   echo "  clean [<base-branch>] - delete merged local branches (by default using master as base)"
 }
@@ -100,6 +101,24 @@ function exec() {
     "${job}"
 }
 
+# create a mirror of an upstream repository
+function mirror() {
+  declare -r module="${1?'missing module: $0 mirror <module>'}"
+  curl "${CURL_OPTS[@]}" --request POST --get ${GITLAB_API_URI}/projects \
+    --data-urlencode name=${module} \
+    --data-urlencode namespace_id=94 \
+    --data-urlencode import_url=https://py:${GITHUB_TOKEN}@github.com/gruntwork-io/${module} \
+    --data-urlencode mirror=true \
+    --data-urlencode default_branch=master \
+    --data-urlencode issues_enabled=false \
+    --data-urlencode merge_requests_enabled=false \
+    --data-urlencode wiki_enabled=false \
+    --data-urlencode snippets_enabled=false \
+    --data-urlencode container_registry_enabled=false \
+    --data-urlencode lfs_enabled=false
+  echo "mirror created at ${GITLAB_HOST}/Exchange/gruntwork-io/${module}"
+}
+
 function main() {
   local command=${1-'none'}
   shift || true
@@ -108,6 +127,7 @@ function main() {
     sync) sync "$@" ;;
     clean) clean "$@" ;;
     exec) exec "$@" ;;
+    mirror) mirror "$@" ;;
     help) usage ;;
     *) usage; exit 1 ;;
   esac
