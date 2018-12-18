@@ -1,0 +1,7 @@
+# https://python-gitlab.readthedocs.io/en/stable/install.html
+
+if missing gitlab; then
+  pip3 install --quiet --user python-gitlab
+fi
+
+success "gitlab-cli $(gitlab --version)"
