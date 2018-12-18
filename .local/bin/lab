@@ -7,6 +7,7 @@ function usage() {
   echo "$0 <command>"
   echo "  clone <group> - clone all projects in the given group into the current directory"
   echo "  mirror <module> - create a new git mirror for a gruntwork repository"
+  echo "  fix-project <project> - apply default configuration to target project"
   echo "  sync [<branch>] - pull latest changes for given branch (by default master)"
   echo "  clean [<base-branch>] - delete merged local branches (by default using master as base)"
 }
@@ -46,9 +47,9 @@ function clean() {
 
 # clone all projects in a gitlab group
 function clone() {
-  declare -r group=${1?'missing group: $0 clone <group>'}
+  declare -r group=${1?"missing group: $0 clone <group>"}
   declare -r json=$(\
-    curl "${CURL_OPTS[@]}" --request GET ${GITLAB_API_URI}/groups/${group}/projects?simple=true \
+    curl "${CURL_OPTS[@]}" --request GET ${GITLAB_API_URI}/groups/${group//\//%2F}/projects?simple=true \
       | jq --raw-output --compact-output '.[] | {path, ssh_url_to_repo}'\
   )
   for project in $(echo "${json}"); do
@@ -63,7 +64,7 @@ function clone() {
 
 # execute a gitlab pipeline job locally
 function exec() {
-  declare -r job=${1?'missing job name: $0 exec <job>'}
+  declare -r job=${1?"missing job name: $0 exec <job>"}
 
   # exit early if in wrong folder (avoid temp folder creation)
   [[ -f .gitlab-ci.yml ]] || die "no local .gitlab-ci.yml found - are you in a project root folder?"
@@ -103,11 +104,11 @@ function exec() {
 
 # create a mirror of an upstream repository
 function mirror() {
-  declare -r module="${1?'missing module: $0 mirror <module>'}"
+  declare -r module="${1?"missing module: $0 mirror <module>"}"
   curl "${CURL_OPTS[@]}" --request POST --get ${GITLAB_API_URI}/projects \
     --data-urlencode name=${module} \
     --data-urlencode namespace_id=94 \
-    --data-urlencode import_url=https://py:${GITHUB_TOKEN}@github.com/gruntwork-io/${module} \
+    --data-urlencode import_url=https://buildpanda:${GITHUB_TOKEN}@github.com/gruntwork-io/${module} \
     --data-urlencode mirror=true \
     --data-urlencode default_branch=master \
     --data-urlencode issues_enabled=false \
@@ -119,6 +120,23 @@ function mirror() {
   echo "mirror created at ${GITLAB_HOST}/Exchange/gruntwork-io/${module}"
 }
 
+# apply best practices settings to a project
+function fix_project() {
+  : ${1?"missing project paht: $0 fix-project <path/to/project>"}
+  declare -r project="${1//\//'%2F'}"
+  echo "fixing ${project}"
+  curl "${CURL_OPTS[@]}" --request PUT --get ${GITLAB_API_URI}/projects/${project} \
+    --data-urlencode default_branch=master \
+    --data-urlencode issues_enabled=false \
+    --data-urlencode wiki_enabled=false \
+    --data-urlencode snippets_enabled=false \
+    --data-urlencode merge_requests_enabled=true \
+    --data-urlencode approvals_before_merge=1 \
+    --data-urlencode only_allow_merge_if_pipeline_succeeds=true \
+    --data-urlencode only_allow_merge_if_all_discussions_are_resolved=true \
+    --data-urlencode merge_method=rebase_merge
+}
+
 function main() {
   local command=${1-'none'}
   shift || true
@@ -128,6 +146,7 @@ function main() {
     clean) clean "$@" ;;
     exec) exec "$@" ;;
     mirror) mirror "$@" ;;
+    fix-project) fix_project "$@" ;;
     help) usage ;;
     *) usage; exit 1 ;;
   esac
