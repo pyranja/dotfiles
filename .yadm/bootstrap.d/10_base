@@ -4,6 +4,7 @@ package \
     apt-transport-https \
     ca-certificates \
     curl \
+    htop \
     jq \
     ldnsutils \
     silversearcher-ag \
