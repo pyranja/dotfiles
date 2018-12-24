@@ -1,0 +1,8 @@
+# https://github.com/sharkdp/fd/releases
+
+if missing fd; then
+  fetch 'https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb' '20a780f5c88f4dce9c4a3b827addcbfe03907c82748165c703736a7b15a208f6' '/tmp/fd.deb'
+  sudo apt install '/tmp/fd.deb' && rm '/tmp/fd.deb'
+fi
+
+success "$(fd --version)"
