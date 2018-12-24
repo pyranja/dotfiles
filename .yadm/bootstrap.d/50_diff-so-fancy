@@ -1,0 +1,8 @@
+# https://github.com/so-fancy/diff-so-fancy
+
+if missing diff-so-fancy; then
+    fetch 'https://raw.githubusercontent.com/so-fancy/diff-so-fancy/v1.2.0/third_party/build_fatpack/diff-so-fancy' 'bd7376b44aca0f4f057e2b7f7760a91c62b892c2128ead21991502f2783e9d58' "/${HOME}/.local/bin/diff-so-fancy"
+    chmod +x "/${HOME}/.local/bin/diff-so-fancy"
+fi
+
+success "$(diff-so-fancy --version)"

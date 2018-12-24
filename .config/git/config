@@ -7,6 +7,7 @@
   whitespace = fix,trailing-space,space-before-tab
   editor = vim
   excludesfile = ~/.config/git/ignore
+  pager = "diff-so-fancy | less --tabs=4 -RFX"
 [credential]
   helper = cache
 [push]
@@ -32,7 +33,19 @@
 [status]
   submodulesummary = 1
 [color]
-  ui = auto
+  ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
 
 [merge]
   tool = vscode
