@@ -6,6 +6,7 @@ package \
     curl \
     jq \
     ldnsutils \
+    silversearcher-ag \
     software-properties-common
 
 # setup .local folder
