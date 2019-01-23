@@ -1,0 +1,7 @@
+# https://httpie.org/
+
+if missing http; then
+  package httpie
+fi
+
+success "httpie $(http --version)"
