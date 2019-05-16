@@ -102,6 +102,11 @@ if command -v bat >/dev/null; then
     alias cat='bat'
 fi
 
+if command -v aws-vault >/dev/null; then
+    alias avs='aws-vault exec staging --'
+    alias avp='aws-vault exec production --'
+fi
+
 # include local init file
 if [ -f /home/"$USER"/.bashrc.local ]; then
     . /home/"$USER"/.bashrc.local
