@@ -104,7 +104,9 @@ fi
 
 if command -v aws-vault >/dev/null; then
     alias avs='aws-vault exec staging --'
+    alias als='aws-vault exec --mfa-token=$(ykman oath code --single aws-bitpanda) staging -- aws sts get-caller-identity'
     alias avp='aws-vault exec production --'
+    alias alp='aws-vault exec --mfa-token=$(ykman oath code --single aws-bitpanda) production -- aws sts get-caller-identity'
 fi
 
 # include local init file
