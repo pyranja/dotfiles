@@ -16,7 +16,7 @@ function usage() {
 : ${GITLAB_API_TOKEN?'private access token is not set'}
 GITLAB_API_URI="${GITLAB_HOST?'gitlab host is not set'}/api/v4"
 
-CURL_OPTS=(--silent --show-error --fail --header "Private-Token: ${GITLAB_API_TOKEN}")
+CURL_OPTS=(--show-error --header "Private-Token: ${GITLAB_API_TOKEN}")
 LAB_HOME="/home/${USER}/.lab"
 
 function die() {
