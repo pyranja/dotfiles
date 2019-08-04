@@ -1,0 +1,6 @@
+if missing peek; then
+    repo ppa:peek-developers/stable
+    package peek
+fi
+
+success "$(peek --version)"
