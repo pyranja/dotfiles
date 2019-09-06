@@ -3,7 +3,7 @@
 
 # ngrok
 if missing ngrok; then
-    fetch 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.tgz' '4df55e2e4d57c50f2e3ea17306e0adf8c554a49882f1196194f977e31f8fc9d6' '/tmp/ngrok.tgz'
+    fetch 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.tgz' '6b19bc87c62aa0157b440e93de3b2031987c96e364b899eb3312d846817160c8' '/tmp/ngrok.tgz'
     tar --extract --directory="/home/$USER/.local/bin" --file='/tmp/ngrok.tgz' && rm '/tmp/ngrok.tgz'
 fi
 
