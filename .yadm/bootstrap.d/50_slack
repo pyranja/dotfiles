@@ -1,0 +1,10 @@
+
+VERSION='4.0.2'
+SHA_256='75c26004ae56bbb944d4b97347b00bb28ff4042d10666490e7974613fc2d7214'
+
+if missing slack; then
+  fetch "https://downloads.slack-edge.com/linux_releases/slack-desktop-${VERSION}-amd64.deb" "${SHA_256}" '/tmp/slack.deb'
+  sudo apt install '/tmp/slack.deb' && rm '/tmp/slack.deb'
+fi
+
+success "slack $(slack --version)"
