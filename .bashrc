@@ -109,6 +109,13 @@ if command -v aws-vault >/dev/null; then
     alias alp='aws-vault exec --assume-role-ttl=1h --mfa-token=$(ykman oath code --single BITPANDA-AWS) production -- aws sts get-caller-identity'
 fi
 
+if command -v todo.sh >/dev/null; then
+    alias todo='todo.sh'
+    # install bash completion and activate for alias
+    source todo_completion
+    complete -F _todo todo
+fi
+
 # include local init file
 if [ -f /home/"$USER"/.bashrc.local ]; then
     . /home/"$USER"/.bashrc.local
