@@ -5,9 +5,9 @@ fi
 success "$(java -version)"
 
 if missing mvn; then
-    fetch 'http://archive.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz' '707b1f6e390a65bde4af4cdaf2a24d45fc19a6ded00fff02e91626e3e42ceaff' '/tmp/maven.tgz'
+    fetch 'http://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz' '26ad91d751b3a9a53087aefa743f4e16a17741d3915b219cf74112bf87a438c5' '/tmp/maven.tgz'
     tar --extract --directory="/home/$USER/.local/lib" --file='/tmp/maven.tgz' && rm '/tmp/maven.tgz'
-    ln --symbolic --force "/home/$USER/.local/lib/apache-maven-3.5.2/bin/mvn" "/home/$USER/.local/bin/mvn"
+    ln --symbolic --force "/home/$USER/.local/lib/apache-maven-3.6.3/bin/mvn" "/home/$USER/.local/bin/mvn"
 fi
 
 success "$(mvn -v)"
