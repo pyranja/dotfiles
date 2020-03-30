@@ -1,0 +1,9 @@
+# https://help.ubuntu.com/community/KVM/Installation
+
+if missing virsh; then
+  package qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
+  # user must be member of virtualization groups
+  sudo usermod --append --groups libvirt,kvm "$USER"
+fi
+
+success "kvm $(virsh --version)"
