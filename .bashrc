@@ -112,7 +112,7 @@ fi
 if command -v todo.sh >/dev/null; then
     alias todo='todo.sh'
     # install bash completion and activate for alias
-    source todo_completion
+    source ~/.local/share/bash-completion/completions/todo
     complete -F _todo todo
 fi
 

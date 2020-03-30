@@ -6,8 +6,9 @@ SHA_256='70dbe017f82c6d21a6d61eaf96bac7b63d99cfd0ddc571f52766267c0fa58a42'
 if missing todo; then
     fetch "https://github.com/todotxt/todo.txt-cli/releases/download/v${VERSION}/todo.txt_cli-${VERSION}.zip" "${SHA_256}" '/tmp/todo.zip'
     unzip -uoq '/tmp/todo.zip' -d "/home/$USER/.local/lib" && rm '/tmp/todo.zip'
-    ln --symbolic --force "/home/$USER/.local/lib/todo.txt_cli-$VERSION/todo.sh" "/home/$USER/.local/bin/todo"
-    sudo cp "/home/$USER/.local/lib/todo.txt_cli-$VERSION/todo_completion" "/etc/bash_completion.d/todo"
+    ln --symbolic --force "/home/$USER/.local/lib/todo.txt_cli-$VERSION/todo.sh" "/home/$USER/.local/bin/todo.sh"
+    mkdir --parents "/home/$USER/.local/share/bash-completion/completions"
+    ln --symbolic --force "/home/$USER/.local/lib/todo.txt_cli-$VERSION/todo_completion" "/home/$USER/.local/share/bash-completion/completions/todo"
 fi
 
 success "$(todo.sh --version)"
