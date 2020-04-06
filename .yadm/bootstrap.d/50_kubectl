@@ -1,0 +1,11 @@
+# https://kubernetes.io/docs/tasks/tools/install-kubectl/
+
+VERSION='v1.18.0'
+CHECKSUM='bb16739fcad964c197752200ff89d89aad7b118cb1de5725dc53fe924c40e3f7'
+
+if missing kubectl; then
+  fetch "https://storage.googleapis.com/kubernetes-release/release/${VERSION}/bin/linux/amd64/kubectl" "${CHECKSUM}" "/home/${USER}/.local/bin/kubectl"
+  chmod +x "/home/${USER}/.local/bin/kubectl"
+fi
+
+success "$(kubectl version --client)"
