@@ -107,6 +107,8 @@ if command -v aws-vault >/dev/null; then
     alias als='aws-vault exec --assume-role-ttl=1h --mfa-token=$(ykman oath code --single BITPANDA-AWS) staging -- aws sts get-caller-identity'
     alias avp='aws-vault exec --assume-role-ttl=1h production --'
     alias alp='aws-vault exec --assume-role-ttl=1h --mfa-token=$(ykman oath code --single BITPANDA-AWS) production -- aws sts get-caller-identity'
+    alias avbs='aws-vault exec --assume-role-ttl=1h bp-staging --'
+    alias albs='aws-vault exec --assume-role-ttl=1h --mfa-token=$(ykman oath code --single BITPANDA-AWS) bp-staging -- aws sts get-caller-identity'
 fi
 
 if command -v todo.sh >/dev/null; then
