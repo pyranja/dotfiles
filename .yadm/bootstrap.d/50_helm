@@ -1,0 +1,11 @@
+# https://helm.sh/docs/intro/install/
+
+VERSION='v3.2.1'
+CHECKSUM='018f9908cb950701a5d59e757653a790c66d8eda288625dbb185354ca6f41f6b'
+
+if missing helm; then
+  fetch "https://get.helm.sh/helm-${VERSION}-linux-amd64.tar.gz" "${CHECKSUM}" '/tmp/helm.tgz'
+  tar --extract --directory="/home/$USER/.local/bin/" --strip 1 --file='/tmp/helm.tgz' && rm '/tmp/helm.tgz'
+fi
+
+success "$(helm version)"
