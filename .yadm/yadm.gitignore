@@ -4,9 +4,6 @@
 # whitelist pattern https://jasonstitt.com/gitignore-whitelisting-patterns
 # ignore everything
 *
-# allow recursive descent into hidden folders
-!.*/
-!.*/**/
 
 # whitelist
 !.yadm/**
@@ -32,3 +29,5 @@
 .local/share/Trash/
 .config/git/gitk
 .password-store*
+.dbus
+.cache
