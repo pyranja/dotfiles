@@ -118,6 +118,10 @@ if command -v todo.sh >/dev/null; then
     complete -F _todo todo
 fi
 
+if command -v kubectl >/dev/null; then
+    source <(kubectl completion bash)
+fi
+
 # run dockerized kafkacat
 alias kc='docker run --interactive --tty --rm --network=host --dns 10.7.0.2 --dns 10.11.0.2 edenhill/kafkacat:1.5.0 kafkacat'
 
