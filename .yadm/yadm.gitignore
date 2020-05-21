@@ -4,6 +4,9 @@
 # whitelist pattern https://jasonstitt.com/gitignore-whitelisting-patterns
 # ignore everything
 *
+# allow descent into hidden folders
+!.*/
+!.*/**/
 
 # whitelist
 !.yadm/**
