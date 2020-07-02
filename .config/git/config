@@ -1,6 +1,7 @@
 [user]
   name = pyranja
   email = chris.borckholder@gmail.com
+	signingkey = 213189DA77238EB3
 [core]
   autocrlf = false
   eol = lf
@@ -66,3 +67,7 @@
 
 [fetch]
 	prune = true
+[url "ssh://git@buildpanda.wtf:10022/Exchange/gruntwork-io/"]
+	insteadOf = ssh://git@github.com/gruntwork-io/
+[commit]
+	gpgsign = true
