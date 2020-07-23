@@ -122,6 +122,13 @@ if command -v kubectl >/dev/null; then
     source <(kubectl completion bash)
 fi
 
+export PYENV_ROOT="${HOME}/.pyenv"
+export PATH="${PYENV_ROOT}/bin:${PATH}"
+
+if command -v pyenv >/dev/null; then
+    eval "$(pyenv init -)"
+fi
+
 # run dockerized kafkacat
 alias kc='docker run --interactive --tty --rm --network=host --dns 10.7.0.2 --dns 10.11.0.2 edenhill/kafkacat:1.5.0 kafkacat'
 alias kcp='docker run --rm --network=host --dns 10.7.0.2 --dns 10.11.0.2 edenhill/kafkacat:1.5.0 kafkacat'
