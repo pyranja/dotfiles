@@ -26,6 +26,7 @@
 !./.travis.yml
 
 # override whitelist to force exclude special folders
+.pyenv/
 .yadm/repo.git/
 .yadm/module-signing/MOK.*
 .local/lib/
