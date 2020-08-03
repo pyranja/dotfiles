@@ -1,0 +1,18 @@
+# https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html
+
+if missing aws; then
+  # pre-requisites
+  package groff less
+  # fetch installer package
+  curl --create-dirs --fail --show-error --silent --output '/tmp/aws-cli.zip' --location --url 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip'
+  # fetch corresponding signature
+  curl --create-dirs --fail --show-error --silent --output '/tmp/aws-cli.zip.sig' --location --url 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip.sig'
+  # verify signature (aws team gpg must be imported beforehand)
+  gpg --verify '/tmp/aws-cli.zip.sig' '/tmp/aws-cli.zip'
+  # continue with installation when package verified
+  unzip -uoq '/tmp/aws-cli.zip' -d '/tmp/aws-cli/' \
+    && /tmp/aws-cli/aws/install --install-dir "/home/${USER}/.local/share/aws-cli" --bin-dir "/home/${USER}/.local/bin" \
+    && rm -r /tmp/aws-cli*
+fi
+
+success "$(aws --version)"
