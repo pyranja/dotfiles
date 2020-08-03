@@ -1,5 +1,10 @@
+# https://github.com/99designs/aws-vault
+
+VERSION=4.5.1
+CHECKSUM='f43dec2fd640447c81cb8d35098132b8548e523a0e85f3e975dac46f5d12ad91'
+
 if missing aws-vault; then
-  fetch 'https://github.com/99designs/aws-vault/releases/download/v4.5.1/aws-vault-linux-amd64' 'f43dec2fd640447c81cb8d35098132b8548e523a0e85f3e975dac46f5d12ad91' "/home/$USER/.local/bin/aws-vault"
+  fetch "https://github.com/99designs/aws-vault/releases/download/v${VERSION}/aws-vault-linux-amd64" "${CHECKSUM}" "/home/$USER/.local/bin/aws-vault"
   chmod +x "/home/$USER/.local/bin/aws-vault"
 fi
 
