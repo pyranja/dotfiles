@@ -1,7 +1,7 @@
 # https://minikube.sigs.k8s.io/docs/start/linux/
 
-VERSION='1.9.0'
-CHECKSUM='aab3168c5ce5662d35e59373d3cfae6677473f72c5a293be7978a6082aae7321'
+VERSION='1.14.1'
+CHECKSUM='537221ca9af0fcf13ff3c4faa76bca870959315d3056cc3b3f276b4c3b97fb44'
 
 if missing minikube; then
   fetch "https://storage.googleapis.com/minikube/releases/latest/minikube_${VERSION}-0_amd64.deb" "${CHECKSUM}" /tmp/minikube.deb
