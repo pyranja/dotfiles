@@ -31,11 +31,17 @@ function list() {
     env=$(basename $config_file | cut -d'.' -f1)
     echo "$env - $(systemctl is-active openvpn@$env)"
   done
+  for config_file in $(ls /etc/openfortivpn/*.conf); do
+    # expect <env>.conf naming convention - same as systemd
+    env=$(basename $config_file | cut -d'.' -f1)
+    echo "$env - $(systemctl is-active openfortivpn@$env)"
+  done
 }
 
 function clear() {
   elevate
   sudo systemctl stop openvpn@*
+  sudo systemctl stop openfortivpn@*
   list
 }
 
@@ -43,7 +49,14 @@ function delegate() {
   elevate
   local command=${1?"missing command: $0 <command> <environment>"}
   local env=${2?"missing environment: $0 <command> <environment>"}
-  sudo systemctl "$command" openvpn@"$env"
+  if [[ -f "/etc/openvpn/$env.conf" ]]; then
+    sudo systemctl "$command" openvpn@"$env"
+  elif [[ -f "/etc/openfortivpn/$env.conf" ]]; then
+    sudo systemctl "$command" openfortivpn@"$env"
+  else
+    echo "cannot find $env.conf"
+    exit 1
+  fi
 }
 
 function elevate() {
