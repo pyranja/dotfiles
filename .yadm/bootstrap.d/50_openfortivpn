@@ -1,0 +1,8 @@
+# https://github.com/adrienverge/openfortivpn
+# https://blog.zenggyu.com/en/post/2019-03-27/openfortivpn-an-open-source-alternative-to-fortinet-s-sslvpn-client/
+
+if missing openfortivpn; then
+  package openfortivpn
+fi
+
+success "openfortivpn $(openfortivpn --version)"
